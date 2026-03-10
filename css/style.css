@@ -899,7 +899,7 @@ a:hover {
 
 /* Wave divider backgrounds - match previous section */
 .wave-divider--hero-to-story {
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy) 100%);
+  background: #0E2D4E; /* Hero section'ın alt gradient rengi ile eşleşiyor */
 }
 
 .wave-divider--story-to-product {
