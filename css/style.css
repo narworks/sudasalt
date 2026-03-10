@@ -179,32 +179,38 @@ a:hover {
 
 .logo-frame {
   position: relative;
-  width: clamp(180px, 30vw, 320px);
-  height: clamp(180px, 30vw, 320px);
+  width: clamp(200px, 35vw, 380px);
+  height: clamp(200px, 35vw, 380px);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(212,168,67,0.4),
+    0 0 80px rgba(212,168,67,0.2),
+    0 0 120px rgba(212,168,67,0.1);
 }
 
 .logo-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 30px rgba(212,168,67,0.3));
+  object-fit: cover;
+  object-position: center;
 }
 
 .logo-glow {
   position: absolute;
-  inset: -20%;
-  background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
+  inset: -30%;
+  background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 60%);
   pointer-events: none;
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 /* Hero Ornament */
@@ -1065,9 +1071,7 @@ a:hover {
   75% { transform: translateY(-15px) rotate(-2deg); }
 }
 
-.hero-logo {
-  animation: float-gentle 6s ease-in-out infinite;
-}
+/* Logo animasyonu kaldırıldı - statik */
 
 /* --- Salt Texture Background --- */
 .salt-texture {
@@ -1163,9 +1167,7 @@ a:hover {
     height: 50px;
   }
 
-  .hero-logo {
-    animation: float-gentle 8s ease-in-out infinite;
-  }
+  /* Logo animasyonu kaldırıldı */
 
   .parallax-crystals {
     display: none;
