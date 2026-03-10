@@ -318,6 +318,70 @@
     document.body.appendChild(grain);
   }
 
+  // --- Contact Form Handler ---
+  function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('.btn-submit');
+      const statusDiv = form.querySelector('.form-status');
+
+      // Get form data
+      const formData = {
+        name: form.querySelector('#name').value.trim(),
+        email: form.querySelector('#email').value.trim(),
+        message: form.querySelector('#message').value.trim()
+      };
+
+      // Validation
+      if (!formData.name || !formData.email || !formData.message) {
+        showStatus(statusDiv, 'Lütfen tüm alanları doldurun.', 'error');
+        return;
+      }
+
+      // Set loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showStatus(statusDiv, 'Mesajınız başarıyla gönderildi!', 'success');
+          form.reset();
+        } else {
+          showStatus(statusDiv, result.error || 'Bir hata oluştu.', 'error');
+        }
+      } catch (error) {
+        showStatus(statusDiv, 'Bağlantı hatası. Lütfen tekrar deneyin.', 'error');
+      } finally {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
+    });
+
+    function showStatus(el, message, type) {
+      el.textContent = message;
+      el.className = 'form-status ' + type;
+      el.style.display = 'block';
+
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, 5000);
+    }
+  }
+
   // --- Init All ---
   document.addEventListener('DOMContentLoaded', () => {
     initGrainOverlay();
@@ -330,6 +394,7 @@
     initParallax();
     initScrollDetection();
     initSectionEffects();
+    initContactForm();
   });
 
   // --- Handle Resize ---
