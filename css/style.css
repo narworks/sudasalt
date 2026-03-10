@@ -875,6 +875,7 @@ a:hover {
   height: 80px;
   overflow: hidden;
   background: transparent;
+  margin-top: -1px; /* Prevent gap */
 }
 
 .wave-divider svg {
@@ -888,6 +889,27 @@ a:hover {
 
 .wave-divider--reverse svg {
   animation-direction: reverse;
+}
+
+/* Wave divider backgrounds - match previous section */
+.wave-divider--hero-to-story {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy) 100%);
+}
+
+.wave-divider--story-to-product {
+  background: var(--warm-white);
+}
+
+.wave-divider--product-to-tradition {
+  background: var(--parchment);
+}
+
+.wave-divider--tradition-to-hayriye {
+  background: var(--navy);
+}
+
+.wave-divider--hayriye-to-contact {
+  background: var(--warm-white);
 }
 
 @keyframes wave-flow {
