@@ -804,3 +804,367 @@ a:hover {
     -webkit-text-fill-color: var(--navy) !important;
   }
 }
+
+/* ==========================================
+   TUZ TEMALI GÖRSEL EFEKTLER
+   ========================================== */
+
+/* --- Grain Texture Overlay --- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* --- Gelişmiş Tuz Kristalleri --- */
+.salt-crystal {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+  animation: float-crystal linear infinite;
+}
+
+.salt-crystal--large {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.salt-crystal--sparkle {
+  background: rgba(212, 168, 67, 0.4);
+  box-shadow: 0 0 8px rgba(212, 168, 67, 0.5);
+  animation: float-crystal linear infinite, sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: translateY(var(--ty, 0)) scale(1); }
+  50% { opacity: 1; transform: translateY(var(--ty, 0)) scale(1.5); }
+}
+
+/* --- Sparkle Efekti --- */
+.sparkle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Wave Divider --- */
+.wave-divider {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.wave-divider svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: wave-flow 8s linear infinite;
+}
+
+.wave-divider--reverse svg {
+  animation-direction: reverse;
+}
+
+@keyframes wave-flow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- Shimmer Hover Efekti --- */
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 168, 67, 0.15),
+    transparent
+  );
+  transition: left 0.6s var(--ease-out-expo);
+}
+
+.shimmer-effect:hover::before {
+  left: 100%;
+}
+
+/* Value cards shimmer */
+.value-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 168, 67, 0.08),
+    transparent
+  );
+  transition: left 0.8s var(--ease-out-expo);
+}
+
+.value-card:hover::before {
+  left: 100%;
+}
+
+/* --- Crystal Glow Button --- */
+.crystal-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.crystal-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(212, 168, 67, 0.4) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.crystal-glow:hover::after {
+  opacity: 1;
+  animation: glow-rotate 2s linear infinite;
+}
+
+@keyframes glow-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Contact link glow */
+.contact-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(212, 168, 67, 0.3), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.contact-link:hover::after {
+  opacity: 1;
+}
+
+/* --- Parallax Kristal Katmanları --- */
+.parallax-crystals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.parallax-crystal {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(212, 168, 67, 0.1);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+/* --- Section Transition Glow --- */
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+/* --- Floating Animation Enhancement --- */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(2deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+  75% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+.hero-logo {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+/* --- Salt Texture Background --- */
+.salt-texture {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px, 80px 80px, 100px 100px;
+}
+
+/* Hero salt texture */
+.hero {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(255,255,255,0.015) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 20%, rgba(212,168,67,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, #0E2D4E 100%);
+  background-size: 60px 60px, 80px 80px, 100px 100px, 100% 100%, 100% 100%;
+}
+
+/* --- Product Image Hover Effect --- */
+.product-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(212, 168, 67, 0.1) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+  transform: translateX(-100%);
+}
+
+.product-frame:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* --- Tradition Quote Glow --- */
+.tradition-quote {
+  position: relative;
+}
+
+.tradition-quote::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
+  opacity: 0.1;
+  z-index: -1;
+  border-radius: 4px;
+  animation: quote-glow 4s ease-in-out infinite;
+}
+
+@keyframes quote-glow {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.15; }
+}
+
+/* --- Stats Number Glow --- */
+.stat-number {
+  text-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+}
+
+/* --- Social Link Crystal Effect --- */
+.social-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.2), transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.social-link:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* --- Mobile Optimizations --- */
+@media (max-width: 768px) {
+  .grain-overlay {
+    opacity: 0.02;
+  }
+
+  .wave-divider {
+    height: 50px;
+  }
+
+  .hero-logo {
+    animation: float-gentle 8s ease-in-out infinite;
+  }
+
+  .parallax-crystals {
+    display: none;
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .salt-crystal,
+  .sparkle,
+  .wave-divider svg,
+  .hero-logo,
+  .shimmer-effect::before,
+  .value-card::before,
+  .tradition-quote::before {
+    animation: none;
+  }
+
+  .shimmer-effect:hover::before,
+  .value-card:hover::before {
+    left: 0;
+    opacity: 0.1;
+  }
+}

@@ -1,10 +1,23 @@
 /* ============================================
    SUDA SALT — main.js
-   Scroll Animations, Counters & Particles
+   Tuz Temalı Görsel Efektler & Animasyonlar
    ============================================ */
 
 (function () {
   'use strict';
+
+  // --- Configuration ---
+  const CONFIG = {
+    particles: {
+      countDesktop: 60,
+      countMobile: 25,
+      types: ['normal', 'large', 'sparkle']
+    },
+    sparkles: {
+      count: 15,
+      sections: ['.story', '.product', '.tradition', '.hayriye', '.contact']
+    }
+  };
 
   // --- Initialize AOS ---
   AOS.init({
@@ -14,22 +27,54 @@
     offset: 60,
   });
 
-  // --- Salt Crystal Particle Background ---
+  // --- Enhanced Salt Crystal Particle System ---
   function initParticles() {
     const container = document.getElementById('heroParticles');
     if (!container) return;
 
-    const count = window.innerWidth < 768 ? 20 : 40;
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? CONFIG.particles.countMobile : CONFIG.particles.countDesktop;
 
     for (let i = 0; i < count; i++) {
       const crystal = document.createElement('div');
-      crystal.classList.add('salt-crystal');
 
-      const size = Math.random() * 4 + 2;
+      // Determine crystal type
+      const typeRand = Math.random();
+      let crystalType = 'normal';
+      if (typeRand > 0.9) {
+        crystalType = 'sparkle';
+      } else if (typeRand > 0.75) {
+        crystalType = 'large';
+      }
+
+      crystal.classList.add('salt-crystal');
+      if (crystalType !== 'normal') {
+        crystal.classList.add(`salt-crystal--${crystalType}`);
+      }
+
+      // Size based on type
+      let size;
+      switch (crystalType) {
+        case 'large':
+          size = Math.random() * 4 + 5;
+          break;
+        case 'sparkle':
+          size = Math.random() * 3 + 3;
+          break;
+        default:
+          size = Math.random() * 3 + 2;
+      }
+
       const left = Math.random() * 100;
-      const duration = Math.random() * 15 + 10;
-      const delay = Math.random() * 15;
-      const opacity = Math.random() * 0.2 + 0.05;
+      const duration = Math.random() * 20 + 15;
+      const delay = Math.random() * 20;
+      const opacity = crystalType === 'sparkle'
+        ? Math.random() * 0.4 + 0.2
+        : Math.random() * 0.25 + 0.05;
+
+      // Random rotation for crystal shape
+      const rotation = Math.random() * 360;
+      const isSquare = Math.random() > 0.4;
 
       crystal.style.cssText = `
         width: ${size}px;
@@ -38,11 +83,115 @@
         animation-duration: ${duration}s;
         animation-delay: -${delay}s;
         opacity: ${opacity};
-        border-radius: ${Math.random() > 0.5 ? '1px' : '50%'};
+        border-radius: ${isSquare ? '1px' : '50%'};
+        transform: rotate(${rotation}deg);
       `;
 
       container.appendChild(crystal);
     }
+  }
+
+  // --- Sparkle Effect for Sections ---
+  function initSparkles() {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return; // Skip on mobile for performance
+
+    CONFIG.sparkles.sections.forEach(selector => {
+      const section = document.querySelector(selector);
+      if (!section) return;
+
+      const container = document.createElement('div');
+      container.classList.add('sparkle-container');
+      section.style.position = 'relative';
+      section.insertBefore(container, section.firstChild);
+
+      for (let i = 0; i < CONFIG.sparkles.count; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = Math.random() * 3 + 2;
+        const delay = Math.random() * 5;
+        const size = Math.random() * 3 + 2;
+
+        sparkle.style.cssText = `
+          left: ${left}%;
+          top: ${top}%;
+          width: ${size}px;
+          height: ${size}px;
+          --duration: ${duration}s;
+          --delay: ${delay}s;
+        `;
+
+        container.appendChild(sparkle);
+      }
+    });
+  }
+
+  // --- Parallax Crystal Layers ---
+  function initParallaxCrystals() {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
+    const container = document.createElement('div');
+    container.classList.add('parallax-crystals');
+    document.body.appendChild(container);
+
+    const crystalCount = 20;
+    const crystals = [];
+
+    for (let i = 0; i < crystalCount; i++) {
+      const crystal = document.createElement('div');
+      crystal.classList.add('parallax-crystal');
+
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const size = Math.random() * 4 + 2;
+      const speed = Math.random() * 0.3 + 0.1;
+
+      crystal.style.cssText = `
+        left: ${left}%;
+        top: ${top}%;
+        width: ${size}px;
+        height: ${size}px;
+      `;
+
+      crystal.dataset.speed = speed;
+      container.appendChild(crystal);
+      crystals.push(crystal);
+    }
+
+    // Parallax scroll effect
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          crystals.forEach(crystal => {
+            const speed = parseFloat(crystal.dataset.speed);
+            const yOffset = scrollY * speed;
+            crystal.style.transform = `translateY(${yOffset}px) rotate(45deg)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // --- Mouse Tracking Glow for Contact Link ---
+  function initMouseTracking() {
+    const contactLink = document.querySelector('.contact-link');
+    if (!contactLink) return;
+
+    contactLink.addEventListener('mousemove', (e) => {
+      const rect = contactLink.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      contactLink.style.setProperty('--x', `${x}%`);
+      contactLink.style.setProperty('--y', `${y}%`);
+    });
   }
 
   // --- Animated Number Counter ---
@@ -101,12 +250,13 @@
     });
   }
 
-  // --- Parallax effect on hero ---
+  // --- Enhanced Parallax effect on hero ---
   function initParallax() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
     let ticking = false;
+    const particles = hero.querySelector('.hero-particles');
 
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -117,35 +267,83 @@
           if (scrollY < heroHeight) {
             const progress = scrollY / heroHeight;
             const content = hero.querySelector('.hero-content');
+
             if (content) {
               content.style.transform = `translateY(${scrollY * 0.3}px)`;
               content.style.opacity = 1 - progress * 0.8;
+            }
+
+            // Parallax particles layer
+            if (particles) {
+              particles.style.transform = `translateY(${scrollY * 0.15}px)`;
             }
           }
           ticking = false;
         });
         ticking = true;
       }
-    });
+    }, { passive: true });
   }
 
-  // --- Navbar show/hide on scroll (future use) ---
+  // --- Scroll Detection ---
   function initScrollDetection() {
-    let lastScroll = 0;
     document.addEventListener('scroll', () => {
       const currentScroll = window.scrollY;
       document.body.classList.toggle('scrolled', currentScroll > 100);
-      lastScroll = currentScroll;
     }, { passive: true });
+  }
+
+  // --- Section Visibility Effects ---
+  function initSectionEffects() {
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  // --- Add Grain Overlay ---
+  function initGrainOverlay() {
+    const grain = document.createElement('div');
+    grain.classList.add('grain-overlay');
+    document.body.appendChild(grain);
   }
 
   // --- Init All ---
   document.addEventListener('DOMContentLoaded', () => {
+    initGrainOverlay();
     initParticles();
+    initSparkles();
+    initParallaxCrystals();
+    initMouseTracking();
     animateCounters();
     initSmoothScroll();
     initParallax();
     initScrollDetection();
+    initSectionEffects();
+  });
+
+  // --- Handle Resize ---
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      // Reinitialize particles on significant resize
+      const container = document.getElementById('heroParticles');
+      if (container) {
+        container.innerHTML = '';
+        initParticles();
+      }
+    }, 250);
   });
 
 })();
