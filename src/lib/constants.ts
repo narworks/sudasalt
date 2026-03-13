@@ -5,8 +5,8 @@ export const GALLERY_VIDEOS: Video[] = [
   {
     id: '1',
     title: 'Suda Salt - Intro',
-    youtubeId: 'dQw4w9WgXcQ', // Placeholder - değiştirilecek
-    duration: 30,
+    youtubeId: 'nWLZ6wrs-y8',
+    duration: 60,
   },
   {
     id: '2',
