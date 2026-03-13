@@ -11,8 +11,8 @@ export const GALLERY_VIDEOS: Video[] = [
   {
     id: '2',
     title: 'Suda Salt - Hikaye',
-    youtubeId: 'dQw4w9WgXcQ', // Placeholder - değiştirilecek
-    duration: 30,
+    youtubeId: 'IH-Ntd8GlKE',
+    duration: 60,
   },
 ]
 
