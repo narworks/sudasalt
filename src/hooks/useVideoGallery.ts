@@ -40,6 +40,12 @@ function reducer(state: VideoGalleryState, action: VideoGalleryAction): VideoGal
         currentIndex: nextIndex,
         progress: 0,
       }
+    case 'GO_TO_VIDEO':
+      return {
+        ...state,
+        currentIndex: action.payload,
+        progress: 0,
+      }
     case 'TOGGLE_MUTE':
       return {
         ...state,
@@ -84,6 +90,11 @@ export function useVideoGallery(onClose?: () => void) {
 
   const toggleMute = useCallback(() => {
     dispatch({ type: 'TOGGLE_MUTE' })
+  }, [])
+
+  const goToVideo = useCallback((index: number) => {
+    dispatch({ type: 'GO_TO_VIDEO', payload: index })
+    startTimeRef.current = Date.now()
   }, [])
 
   const skip = useCallback(() => {
@@ -131,6 +142,7 @@ export function useVideoGallery(onClose?: () => void) {
     startWithSound,
     close,
     nextVideo,
+    goToVideo,
     toggleMute,
     skip,
   }

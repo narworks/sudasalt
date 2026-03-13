@@ -19,6 +19,7 @@ export type VideoGalleryAction =
   | { type: 'START_WITH_SOUND' }
   | { type: 'CLOSE' }
   | { type: 'NEXT_VIDEO' }
+  | { type: 'GO_TO_VIDEO'; payload: number }
   | { type: 'TOGGLE_MUTE' }
   | { type: 'SET_PROGRESS'; payload: number }
   | { type: 'SET_PLAYING'; payload: boolean }

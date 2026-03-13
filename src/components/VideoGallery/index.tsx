@@ -18,6 +18,7 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
     totalVideos,
     startWithSound,
     close,
+    goToVideo,
     toggleMute,
     skip,
   } = useVideoGallery(onClose)
@@ -46,6 +47,7 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
             progress={state.progress}
             currentIndex={state.currentIndex}
             totalVideos={totalVideos}
+            onDotClick={goToVideo}
           />
         </>
       )}
