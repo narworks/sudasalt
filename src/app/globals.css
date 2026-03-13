@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   SUDA SALT — Global Styles
+   ============================================ */
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #FAF8F0;
+    color: #3D3D3D;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(212, 168, 67, 0.3);
+    color: #0A2540;
+  }
+}
+
+@layer components {
+  /* Section Utilities */
+  .section-padding {
+    padding: clamp(4rem, 8vw, 8rem) 0;
+  }
+
+  .section-glow {
+    position: relative;
+  }
+
+  .section-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.4), transparent);
+  }
+
+  /* Typography */
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    color: #D4A843;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #0A2540;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .text-gold {
+    color: #D4A843;
+  }
+
+  /* Wave Divider */
+  .wave-divider {
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+    background: transparent;
+    margin-top: -1px;
+  }
+
+  .wave-divider svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    animation: wave-flow 8s linear infinite;
+  }
+
+  .wave-divider--reverse svg {
+    animation-direction: reverse;
+  }
+
+  /* Salt Crystal Particles */
+  .salt-crystal {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 1px;
+    animation: float-crystal 20s infinite linear;
+    pointer-events: none;
+  }
+
+  .salt-crystal--large {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .salt-crystal--sparkle {
+    background: rgba(212, 168, 67, 0.6);
+    box-shadow: 0 0 8px rgba(212, 168, 67, 0.4);
+  }
+
+  /* Sparkle Effect */
+  .sparkle-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .sparkle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(212, 168, 67, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: sparkle var(--duration, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* Grain Overlay */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Crystal Glow Effect */
+  .crystal-glow {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .crystal-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, transparent, rgba(212, 168, 67, 0.3), transparent);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .crystal-glow:hover::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Keyframes - defined in tailwind.config.ts but also here for reference */
+@keyframes float-crystal {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) rotate(360deg);
+    opacity: 0;
+  }
+}

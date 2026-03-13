@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450">
+  <defs>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B4965"/>
+      <stop offset="100%" style="stop-color:#0A2540"/>
+    </linearGradient>
+    <linearGradient id="lidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0E2D4E"/>
+      <stop offset="100%" style="stop-color:#0A2540"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A843"/>
+      <stop offset="50%" style="stop-color:#E8C776"/>
+      <stop offset="100%" style="stop-color:#D4A843"/>
+    </linearGradient>
+    <linearGradient id="saltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#F0F0E4"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="450" fill="#F5EFE0"/>
+
+  <!-- Salt grains scattered -->
+  <g opacity="0.3">
+    <rect x="50" y="380" width="4" height="4" fill="#FFF" transform="rotate(45 52 382)"/>
+    <rect x="100" y="400" width="3" height="3" fill="#FFF" transform="rotate(30 101 401)"/>
+    <rect x="150" y="390" width="5" height="5" fill="#FFF" transform="rotate(60 152 392)"/>
+    <rect x="450" y="385" width="4" height="4" fill="#FFF" transform="rotate(20 452 387)"/>
+    <rect x="500" y="395" width="3" height="3" fill="#FFF" transform="rotate(50 501 396)"/>
+    <rect x="530" y="380" width="4" height="4" fill="#FFF" transform="rotate(35 532 382)"/>
+  </g>
+
+  <!-- Box Shadow -->
+  <rect x="130" y="120" width="340" height="260" rx="8" fill="#000" opacity="0.15" transform="translate(10, 15)"/>
+
+  <!-- Main Box Body -->
+  <rect x="130" y="120" width="340" height="260" rx="8" fill="url(#boxGrad)" filter="url(#shadow)"/>
+
+  <!-- Box Lid -->
+  <rect x="120" y="100" width="360" height="50" rx="6" fill="url(#lidGrad)"/>
+
+  <!-- Gold border on lid -->
+  <rect x="120" y="100" width="360" height="50" rx="6" fill="none" stroke="url(#goldAccent)" stroke-width="2"/>
+
+  <!-- Decorative lines on box -->
+  <line x1="150" y1="180" x2="450" y2="180" stroke="url(#goldAccent)" stroke-width="1" opacity="0.5"/>
+  <line x1="150" y1="340" x2="450" y2="340" stroke="url(#goldAccent)" stroke-width="1" opacity="0.5"/>
+
+  <!-- Ottoman ornament on lid -->
+  <g transform="translate(300, 125)">
+    <line x1="-60" y1="0" x2="-20" y2="0" stroke="url(#goldAccent)" stroke-width="1"/>
+    <rect x="-8" y="-8" width="16" height="16" fill="url(#goldAccent)" transform="rotate(45)"/>
+    <line x1="20" y1="0" x2="60" y2="0" stroke="url(#goldAccent)" stroke-width="1"/>
+  </g>
+
+  <!-- Salt Crystal Icon on Box -->
+  <g transform="translate(300, 230)">
+    <polygon points="0,-50 30,0 0,50 -30,0" fill="url(#saltGrad)" opacity="0.9"/>
+    <polygon points="0,-50 30,0 0,0" fill="#FFFFFF" opacity="0.3"/>
+  </g>
+
+  <!-- Brand Name on Box -->
+  <text x="300" y="310" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="url(#goldAccent)" letter-spacing="6">SUDA SALT</text>
+
+  <!-- Tagline on Box -->
+  <text x="300" y="335" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#E8C776" letter-spacing="2" opacity="0.8">TURK KAYNAK TUZU</text>
+
+  <!-- 1851 Year Badge -->
+  <g transform="translate(300, 370)">
+    <rect x="-40" y="-12" width="80" height="24" rx="4" fill="none" stroke="url(#goldAccent)" stroke-width="1"/>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="url(#goldAccent)" letter-spacing="3">1851</text>
+  </g>
+
+  <!-- Sirket-i Hayriye text -->
+  <text x="300" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#E8C776" letter-spacing="1" opacity="0.7">Sirket-i Hayriye Koleksiyonu</text>
+
+  <!-- Decorative corners -->
+  <g stroke="url(#goldAccent)" stroke-width="1" fill="none" opacity="0.6">
+    <path d="M150,150 L150,160 L160,160"/>
+    <path d="M450,150 L450,160 L440,160"/>
+    <path d="M150,350 L150,340 L160,340"/>
+    <path d="M450,350 L450,340 L440,340"/>
+  </g>
+</svg>

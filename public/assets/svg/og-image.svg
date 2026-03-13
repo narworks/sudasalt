@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#061829"/>
+      <stop offset="50%" style="stop-color:#0A2540"/>
+      <stop offset="100%" style="stop-color:#0E2D4E"/>
+    </linearGradient>
+    <linearGradient id="ogGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A843"/>
+      <stop offset="50%" style="stop-color:#E8C776"/>
+      <stop offset="100%" style="stop-color:#D4A843"/>
+    </linearGradient>
+    <linearGradient id="ogCrystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0F0E4;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.7"/>
+    </linearGradient>
+    <filter id="ogGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Salt texture dots -->
+  <g opacity="0.05">
+    <circle cx="100" cy="100" r="2" fill="#FFF"/>
+    <circle cx="250" cy="80" r="1.5" fill="#FFF"/>
+    <circle cx="400" cy="150" r="2" fill="#FFF"/>
+    <circle cx="550" cy="50" r="1" fill="#FFF"/>
+    <circle cx="700" cy="120" r="2.5" fill="#FFF"/>
+    <circle cx="850" cy="90" r="1.5" fill="#FFF"/>
+    <circle cx="1000" cy="140" r="2" fill="#FFF"/>
+    <circle cx="1100" cy="70" r="1" fill="#FFF"/>
+    <circle cx="150" cy="500" r="2" fill="#FFF"/>
+    <circle cx="300" cy="550" r="1.5" fill="#FFF"/>
+    <circle cx="500" cy="520" r="2" fill="#FFF"/>
+    <circle cx="750" cy="560" r="1" fill="#FFF"/>
+    <circle cx="900" cy="510" r="2.5" fill="#FFF"/>
+    <circle cx="1050" cy="540" r="1.5" fill="#FFF"/>
+  </g>
+
+  <!-- Decorative corner lines -->
+  <g stroke="url(#ogGoldGrad)" stroke-width="2" opacity="0.3">
+    <path d="M50,50 L50,100 L100,100" fill="none"/>
+    <path d="M1150,50 L1150,100 L1100,100" fill="none"/>
+    <path d="M50,580 L50,530 L100,530" fill="none"/>
+    <path d="M1150,580 L1150,530 L1100,530" fill="none"/>
+  </g>
+
+  <!-- Main Crystal -->
+  <g transform="translate(600, 240)">
+    <polygon points="0,-100 60,0 0,100 -60,0" fill="url(#ogCrystalGrad)" filter="url(#ogGlow)"/>
+    <polygon points="0,-100 60,0 0,0" fill="#FFFFFF" opacity="0.3"/>
+  </g>
+
+  <!-- Small crystals -->
+  <g transform="translate(450, 280) rotate(-15)">
+    <polygon points="0,-40 24,0 0,40 -24,0" fill="url(#ogCrystalGrad)" opacity="0.6"/>
+  </g>
+  <g transform="translate(750, 280) rotate(15)">
+    <polygon points="0,-40 24,0 0,40 -24,0" fill="url(#ogCrystalGrad)" opacity="0.6"/>
+  </g>
+
+  <!-- Brand Name -->
+  <text x="600" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="url(#ogGoldGrad)" letter-spacing="15">SUDA SALT</text>
+
+  <!-- Ornament line -->
+  <g transform="translate(600, 460)">
+    <line x1="-120" y1="0" x2="-30" y2="0" stroke="url(#ogGoldGrad)" stroke-width="1"/>
+    <rect x="-12" y="-12" width="24" height="24" fill="url(#ogGoldGrad)" transform="rotate(45)" opacity="0.8"/>
+    <line x1="30" y1="0" x2="120" y2="0" stroke="url(#ogGoldGrad)" stroke-width="1"/>
+  </g>
+
+  <!-- Tagline -->
+  <text x="600" y="520" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#E8C776" letter-spacing="8" opacity="0.9">TURK KAYNAK TUZU</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="570" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#F0F0E4" letter-spacing="2" opacity="0.6">Doganin En Saf Hali</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A843"/>
+      <stop offset="50%" style="stop-color:#E8C776"/>
+      <stop offset="100%" style="stop-color:#D4A843"/>
+    </linearGradient>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0F0E4;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="180" fill="#0A2540"/>
+  <circle cx="200" cy="200" r="170" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5"/>
+
+  <!-- Decorative Ring -->
+  <circle cx="200" cy="200" r="155" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="8 4"/>
+
+  <!-- Salt Crystal - Main -->
+  <g transform="translate(200, 140)">
+    <!-- Large crystal -->
+    <polygon points="0,-60 35,0 0,60 -35,0" fill="url(#crystalGrad)" filter="url(#glow)"/>
+    <polygon points="0,-60 35,0 0,0" fill="#FFFFFF" opacity="0.3"/>
+  </g>
+
+  <!-- Salt Crystals - Small decorative -->
+  <g transform="translate(120, 170) rotate(-15)">
+    <polygon points="0,-25 15,0 0,25 -15,0" fill="url(#crystalGrad)" opacity="0.7"/>
+  </g>
+  <g transform="translate(280, 170) rotate(15)">
+    <polygon points="0,-25 15,0 0,25 -15,0" fill="url(#crystalGrad)" opacity="0.7"/>
+  </g>
+  <g transform="translate(145, 220) rotate(-5)">
+    <polygon points="0,-15 9,0 0,15 -9,0" fill="url(#crystalGrad)" opacity="0.5"/>
+  </g>
+  <g transform="translate(255, 220) rotate(5)">
+    <polygon points="0,-15 9,0 0,15 -9,0" fill="url(#crystalGrad)" opacity="0.5"/>
+  </g>
+
+  <!-- Brand Text -->
+  <text x="200" y="280" text-anchor="middle" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="url(#goldGrad)" letter-spacing="8">SUDA</text>
+  <text x="200" y="325" text-anchor="middle" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="url(#goldGrad)" letter-spacing="8">SALT</text>
+
+  <!-- Tagline -->
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#E8C776" letter-spacing="3" opacity="0.8">TURK KAYNAK TUZU</text>
+
+  <!-- Decorative dots -->
+  <circle cx="130" cy="300" r="3" fill="#D4A843" opacity="0.4"/>
+  <circle cx="270" cy="300" r="3" fill="#D4A843" opacity="0.4"/>
+</svg>
