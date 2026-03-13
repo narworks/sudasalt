@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   description: "Suda Salt: Anadolu'nun binlerce yıllık tuz kaynaklarından, doğanın en saf hali. Premium Türk kaynak tuzu. Osmanlı Denizcilik Tarihine Saygıyla.",
   keywords: 'Suda Salt, Türk kaynak tuzu, doğal tuz, premium tuz, Anadolu tuzu, kaynak tuzu, Osmanlı, Şirket-i Hayriye',
   authors: [{ name: 'sudasalt.com' }],
+  icons: {
+    icon: '/assets/images/logo.webp',
+    apple: '/assets/images/logo.webp',
+  },
   openGraph: {
     type: 'website',
     title: 'Suda Salt — Türk Kaynak Tuzu',
