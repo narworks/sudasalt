@@ -13,6 +13,7 @@ export interface VideoGalleryState {
   isPlaying: boolean
   isMuted: boolean
   progress: number
+  duration: number
 }
 
 export type VideoGalleryAction =
@@ -23,6 +24,8 @@ export type VideoGalleryAction =
   | { type: 'TOGGLE_MUTE' }
   | { type: 'SET_PROGRESS'; payload: number }
   | { type: 'SET_PLAYING'; payload: boolean }
+  | { type: 'SET_DURATION'; payload: number }
+  | { type: 'VIDEO_ENDED' }
 
 // Value Card Types
 export interface ValueCard {

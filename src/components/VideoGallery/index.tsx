@@ -21,6 +21,8 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
     goToVideo,
     toggleMute,
     skip,
+    setDuration,
+    onVideoEnded,
   } = useVideoGallery(onClose)
 
   if (!state.isOpen) return null
@@ -35,6 +37,8 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
             youtubeId={currentVideo.youtubeId}
             isMuted={state.isMuted}
             isPlaying={state.isPlaying}
+            onDuration={setDuration}
+            onEnded={onVideoEnded}
           />
           <VideoOverlay />
           <VideoControls

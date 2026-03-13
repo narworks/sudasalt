@@ -9,6 +9,7 @@ const initialState: VideoGalleryState = {
   isPlaying: false,
   isMuted: false,
   progress: 0,
+  duration: 0,
 }
 
 function reducer(state: VideoGalleryState, action: VideoGalleryAction): VideoGalleryState {
@@ -61,6 +62,26 @@ function reducer(state: VideoGalleryState, action: VideoGalleryAction): VideoGal
         ...state,
         isPlaying: action.payload,
       }
+    case 'SET_DURATION':
+      return {
+        ...state,
+        duration: action.payload,
+      }
+    case 'VIDEO_ENDED':
+      const nextIdx = state.currentIndex + 1
+      if (nextIdx >= GALLERY_VIDEOS.length) {
+        return {
+          ...state,
+          isOpen: false,
+          isPlaying: false,
+        }
+      }
+      return {
+        ...state,
+        currentIndex: nextIdx,
+        progress: 0,
+        duration: 0,
+      }
     default:
       return state
   }
@@ -105,20 +126,24 @@ export function useVideoGallery(onClose?: () => void) {
     }
   }, [state.currentIndex, close, nextVideo])
 
+  const setDuration = useCallback((duration: number) => {
+    dispatch({ type: 'SET_DURATION', payload: duration })
+  }, [])
+
+  const onVideoEnded = useCallback(() => {
+    dispatch({ type: 'VIDEO_ENDED' })
+    startTimeRef.current = Date.now()
+  }, [])
+
   // Timer-based progress tracking
   useEffect(() => {
-    if (!state.isPlaying || !state.hasStarted) return
+    if (!state.isPlaying || !state.hasStarted || state.duration === 0) return
 
     timerRef.current = setInterval(() => {
       const elapsed = (Date.now() - startTimeRef.current) / 1000
-      const duration = currentVideo?.duration || 30
-      const progress = Math.min((elapsed / duration) * 100, 100)
+      const progress = Math.min((elapsed / state.duration) * 100, 100)
 
       dispatch({ type: 'SET_PROGRESS', payload: progress })
-
-      if (progress >= 100) {
-        nextVideo()
-      }
     }, 100)
 
     return () => {
@@ -126,7 +151,7 @@ export function useVideoGallery(onClose?: () => void) {
         clearInterval(timerRef.current)
       }
     }
-  }, [state.isPlaying, state.hasStarted, state.currentIndex, currentVideo, nextVideo])
+  }, [state.isPlaying, state.hasStarted, state.currentIndex, state.duration])
 
   // Cleanup on close
   useEffect(() => {
@@ -145,5 +170,7 @@ export function useVideoGallery(onClose?: () => void) {
     goToVideo,
     toggleMute,
     skip,
+    setDuration,
+    onVideoEnded,
   }
 }
