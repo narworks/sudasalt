@@ -4,12 +4,6 @@ import { Video, ValueCard } from './types'
 export const GALLERY_VIDEOS: Video[] = [
   {
     id: '1',
-    title: 'Suda Salt - Intro',
-    youtubeId: 'nWLZ6wrs-y8',
-    duration: 60,
-  },
-  {
-    id: '2',
     title: 'Suda Salt - Hikaye',
     youtubeId: 'IH-Ntd8GlKE',
     duration: 60,
