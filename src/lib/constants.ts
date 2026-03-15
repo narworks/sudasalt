@@ -4,8 +4,8 @@ import { Video, ValueCard } from './types'
 export const GALLERY_VIDEOS: Video[] = [
   {
     id: '1',
-    title: 'Suda Salt - Hikaye',
-    youtubeId: 'IH-Ntd8GlKE',
+    title: 'Boğaz\'da Yolculuk',
+    youtubeId: 'Pl1sG6AontQ',
     duration: 60,
   },
 ]
