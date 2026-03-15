@@ -79,7 +79,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.6 }}
         >
-          Türk Kaynak Tuzu Deneyimi
+          Türk Kaynak Tuzu
         </motion.p>
 
         {/* Start Button */}
@@ -98,7 +98,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z" />
             </svg>
-            Deneyimi Başlat
+            Başlat
           </span>
         </motion.button>
 
