@@ -18,7 +18,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
     >
       {/* Yatay cihazlar için görsel (landscape/desktop) */}
       <Image
-        src="/images/welcome-screen.jpg"
+        src="/assets/images/welcome-screen.jpg"
         alt="Suda Salt - Hoş Geldiniz"
         fill
         className="hidden object-contain landscape:block"
@@ -28,7 +28,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
 
       {/* Dikey cihazlar için görsel (portrait/mobile) */}
       <Image
-        src="/images/welcome-screen-vertical.png"
+        src="/assets/images/welcome-screen-vertical.png"
         alt="Suda Salt - Hoş Geldiniz"
         fill
         className="block object-contain landscape:hidden"
