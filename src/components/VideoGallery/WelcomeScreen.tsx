@@ -58,7 +58,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             alt="Suda Salt"
             width={150}
             height={150}
-            className="w-36 h-36 md:w-48 md:h-48 mx-auto object-contain"
+            className="w-44 h-44 md:w-60 md:h-60 mx-auto object-contain"
           />
         </motion.div>
 
