@@ -62,16 +62,17 @@ export default function VideoPlayer({
       const duration = player.getDuration()
       onDuration(duration)
 
-      if (isPlaying) {
-        player.playVideo()
-      }
+      // Video otomatik başlasın
+      player.playVideo()
+
+      // Kullanıcı etkileşiminden sonra sesi aç/kapat
       if (isMuted) {
         player.mute()
       } else {
         player.unMute()
       }
     },
-    [onDuration, isPlaying, isMuted]
+    [onDuration, isMuted]
   )
 
   const onPlayerStateChange = useCallback(
@@ -114,7 +115,7 @@ export default function VideoPlayer({
         videoId: youtubeId,
         playerVars: {
           autoplay: 1,
-          mute: isMuted ? 1 : 0,
+          mute: 1, // Mobilde autoplay için başlangıçta sessiz
           controls: 0,
           showinfo: 0,
           rel: 0,
@@ -138,7 +139,7 @@ export default function VideoPlayer({
         playerRef.current = null
       }
     }
-  }, [youtubeId, onPlayerReady, onPlayerStateChange, isMuted])
+  }, [youtubeId, onPlayerReady, onPlayerStateChange])
 
   // Handle mute/unmute changes
   useEffect(() => {
