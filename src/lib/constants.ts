@@ -5,7 +5,7 @@ export const GALLERY_VIDEOS: Video[] = [
   {
     id: '1',
     title: 'Boğaz\'da Yolculuk',
-    youtubeId: 'Pl1sG6AontQ',
+    src: '/assets/videos/bogaz-yolculuk.mp4',
     duration: 60,
   },
 ]

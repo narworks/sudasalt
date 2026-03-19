@@ -1,45 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
-declare global {
-  interface Window {
-    YT: {
-      Player: new (
-        elementId: string,
-        config: {
-          videoId: string
-          playerVars?: Record<string, number | string>
-          events?: {
-            onReady?: (event: { target: YTPlayer }) => void
-            onStateChange?: (event: { data: number; target: YTPlayer }) => void
-          }
-        }
-      ) => YTPlayer
-      PlayerState: {
-        ENDED: number
-        PLAYING: number
-        PAUSED: number
-        BUFFERING: number
-        CUED: number
-      }
-    }
-    onYouTubeIframeAPIReady?: () => void
-  }
-}
-
-interface YTPlayer {
-  playVideo: () => void
-  pauseVideo: () => void
-  mute: () => void
-  unMute: () => void
-  getDuration: () => number
-  destroy: () => void
-}
-
 interface VideoPlayerProps {
-  youtubeId: string
+  src: string
   isMuted: boolean
   isPlaying: boolean
   onDuration: (duration: number) => void
@@ -47,121 +12,61 @@ interface VideoPlayerProps {
 }
 
 export default function VideoPlayer({
-  youtubeId,
+  src,
   isMuted,
   isPlaying,
   onDuration,
   onEnded,
 }: VideoPlayerProps) {
-  const playerRef = useRef<YTPlayer | null>(null)
-  const containerRef = useRef<string>(`yt-player-${Date.now()}`)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
-  const onPlayerReady = useCallback(
-    (event: { target: YTPlayer }) => {
-      const player = event.target
-      const duration = player.getDuration()
-      onDuration(duration)
-
-      // Video otomatik başlasın
-      player.playVideo()
-
-      // Kullanıcı etkileşiminden sonra sesi aç/kapat
-      if (isMuted) {
-        player.mute()
-      } else {
-        player.unMute()
-      }
-    },
-    [onDuration, isMuted]
-  )
-
-  const onPlayerStateChange = useCallback(
-    (event: { data: number }) => {
-      if (event.data === window.YT.PlayerState.ENDED) {
-        onEnded()
-      }
-    },
-    [onEnded]
-  )
-
+  // Video yüklendiğinde süreyi al
   useEffect(() => {
-    const loadYouTubeAPI = () => {
-      if (window.YT && window.YT.Player) {
-        createPlayer()
-        return
-      }
+    const video = videoRef.current
+    if (!video) return
 
-      const existingScript = document.querySelector(
-        'script[src="https://www.youtube.com/iframe_api"]'
-      )
-      if (!existingScript) {
-        const tag = document.createElement('script')
-        tag.src = 'https://www.youtube.com/iframe_api'
-        const firstScriptTag = document.getElementsByTagName('script')[0]
-        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
-      }
-
-      window.onYouTubeIframeAPIReady = () => {
-        createPlayer()
-      }
+    const handleLoadedMetadata = () => {
+      onDuration(video.duration)
     }
 
-    const createPlayer = () => {
-      if (playerRef.current) {
-        playerRef.current.destroy()
-      }
-
-      playerRef.current = new window.YT.Player(containerRef.current, {
-        videoId: youtubeId,
-        playerVars: {
-          autoplay: 1,
-          mute: 1, // Mobilde autoplay için başlangıçta sessiz
-          controls: 0,
-          showinfo: 0,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
-          loop: 0,
-          enablejsapi: 1,
-        },
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange,
-        },
-      })
+    const handleEnded = () => {
+      onEnded()
     }
 
-    loadYouTubeAPI()
+    video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    video.addEventListener('ended', handleEnded)
+
+    // Eğer video zaten yüklendiyse
+    if (video.readyState >= 1) {
+      onDuration(video.duration)
+    }
 
     return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy()
-        playerRef.current = null
-      }
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      video.removeEventListener('ended', handleEnded)
     }
-  }, [youtubeId, onPlayerReady, onPlayerStateChange])
+  }, [src, onDuration, onEnded])
 
-  // Handle mute/unmute changes
+  // Play/Pause kontrolü
   useEffect(() => {
-    if (playerRef.current) {
-      if (isMuted) {
-        playerRef.current.mute()
-      } else {
-        playerRef.current.unMute()
-      }
-    }
-  }, [isMuted])
+    const video = videoRef.current
+    if (!video) return
 
-  // Handle play/pause changes
-  useEffect(() => {
-    if (playerRef.current) {
-      if (isPlaying) {
-        playerRef.current.playVideo()
-      } else {
-        playerRef.current.pauseVideo()
-      }
+    if (isPlaying) {
+      video.currentTime = 0
+      video.play().catch(console.error)
+    } else {
+      video.pause()
     }
   }, [isPlaying])
+
+  // Mute kontrolü
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.muted = isMuted
+  }, [isMuted])
 
   return (
     <motion.div
@@ -170,18 +75,14 @@ export default function VideoPlayer({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Video Container - contains video within screen, maintains 16:9 aspect ratio */}
-      <div
-        className="relative"
-        style={{
-          width: '100%',
-          height: '100%',
-          maxWidth: '177.78vh', // 16:9: width = height * 16/9
-          maxHeight: '56.25vw', // 16:9: height = width * 9/16
-        }}
-      >
-        <div id={containerRef.current} className="w-full h-full" />
-      </div>
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-contain"
+        playsInline
+        muted={isMuted}
+        preload="auto"
+      />
     </motion.div>
   )
 }

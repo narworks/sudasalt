@@ -2,7 +2,7 @@
 export interface Video {
   id: string
   title: string
-  youtubeId: string
+  src: string // local video path
   duration: number // seconds
 }
 

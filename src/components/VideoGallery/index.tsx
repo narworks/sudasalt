@@ -34,7 +34,7 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
       ) : (
         <>
           <VideoPlayer
-            youtubeId={currentVideo.youtubeId}
+            src={currentVideo.src}
             isMuted={state.isMuted}
             isPlaying={state.isPlaying}
             onDuration={setDuration}
