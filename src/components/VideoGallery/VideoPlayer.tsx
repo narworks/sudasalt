@@ -164,22 +164,19 @@ export default function VideoPlayer({
 
   return (
     <motion.div
-      className="absolute inset-0 overflow-hidden bg-black"
+      className="absolute inset-0 overflow-hidden bg-black flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Video Container - maintains aspect ratio while filling screen */}
+      {/* Video Container - contains video within screen, maintains 16:9 aspect ratio */}
       <div
-        className="absolute"
+        className="relative"
         style={{
-          minWidth: '100vw',
-          minHeight: '100vh',
-          width: '177.78vh', // 16:9 aspect ratio
-          height: '56.25vw', // 16:9 aspect ratio
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          width: '100%',
+          height: '100%',
+          maxWidth: '177.78vh', // 16:9: width = height * 16/9
+          maxHeight: '56.25vw', // 16:9: height = width * 9/16
         }}
       >
         <div id={containerRef.current} className="w-full h-full" />
