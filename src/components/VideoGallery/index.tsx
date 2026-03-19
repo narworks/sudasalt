@@ -44,8 +44,6 @@ export default function VideoGallery({ onClose }: VideoGalleryProps) {
           <VideoControls
             isMuted={state.isMuted}
             onToggleMute={toggleMute}
-            onClose={close}
-            onSkip={skip}
           />
           <VideoProgress
             progress={state.progress}
