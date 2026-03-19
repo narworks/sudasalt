@@ -16,22 +16,12 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
       transition={{ duration: 0.5 }}
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-navy-deep"
     >
-      {/* Yatay cihazlar için görsel (landscape/desktop) */}
+      {/* Karşılama görseli */}
       <Image
-        src="/assets/images/welcome-screen.jpg"
+        src="/assets/images/welcome.png"
         alt="Suda Salt - Hoş Geldiniz"
         fill
-        className="hidden object-contain landscape:block"
-        priority
-        sizes="100vw"
-      />
-
-      {/* Dikey cihazlar için görsel (portrait/mobile) */}
-      <Image
-        src="/assets/images/welcome-screen-vertical.png"
-        alt="Suda Salt - Hoş Geldiniz"
-        fill
-        className="block object-contain landscape:hidden"
+        className="object-contain"
         priority
         sizes="100vw"
       />
